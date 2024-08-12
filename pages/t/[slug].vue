@@ -11,7 +11,7 @@ const { toast } = useToast()
 const { data, refresh } = await useFetch<DBComponent[]>(`/api/component/${slug.value}`)
 const { user } = useUserSession()
 const dataUser = computed(() => data.value?.at(-1)?.user)
-const isUserCreator = computed(() => dataUser.value?.id === user.value?.id)
+const isUserCreator = computed(() => useRuntimeConfig().public.disableLogin || dataUser.value?.id === user.value?.id)
 
 const selectedVersion = ref<NonNullable<typeof data.value>[number]>()
 

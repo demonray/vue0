@@ -5,6 +5,12 @@ export { upperFirst as capitalize } from 'scule'
 
 export function useOpenAI(event: H3Event<EventHandlerRequest>) {
   const apiKey = process.env.NUXT_OPENAI_API_KEY || event.node.req.headers['x-openai-key']?.toString()
+  if (process.env.NUXT_OPENAI_API_BASEURL) {
+    return new OpenAI({
+        baseURL: process.env.NUXT_OPENAI_API_BASEURL,
+        apiKey,
+      })
+  }
   return new OpenAI({
     apiKey,
   })

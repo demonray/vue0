@@ -13,6 +13,7 @@ export default defineNuxtConfig({
       siteUrl: '',
       umamiHost: '',
       umamiId: '',
+      disableLogin: true,
     },
     browserlessApiKey: '',
     github: {
@@ -21,7 +22,7 @@ export default defineNuxtConfig({
     },
     session: {
       name: 'nuxt-session',
-      password: '',
+      password: 'test-vue0',
     },
   },
   modules: [

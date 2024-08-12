@@ -7,7 +7,11 @@ export default defineEventHandler(async (event) => {
     prompt: z.string(),
     basedOnResultId: z.string().optional(),
   }).safeParse)
-  const user = await validateUser(event)
+  // This a test user, just used for local development
+  // to not have to use githuh oauth
+  const user = useRuntimeConfig().public.disableLogin ?
+  { id: 59365435 } :
+  await validateUser(event);
 
   if (result.success) {
     const { slug, prompt, basedOnResultId } = result.data

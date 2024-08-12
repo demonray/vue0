@@ -17,7 +17,7 @@ async function handleSubmit() {
   if (!prompt.value)
     return
 
-  if (!loggedIn.value) {
+  if (!useRuntimeConfig().public.disableLogin && !loggedIn.value) {
     openLoginDialog.value = true
     return
   }
