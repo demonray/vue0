@@ -21,7 +21,7 @@ declare module 'h3' {
 export default async (event: H3Event<EventHandlerRequest>) => {
   console.log('> init : design new component')
   const { prompt } = await readBody(event)
-
+  console.log(prompt)
   const components = (await import('@/template/shadcn-vue/metadata.json')).default
   const functionSchema = z.object({
     new_component_description: z.string().describe(`Write a description for Vue component design task based on the user query. Stick strictly to what the user wants in their request - do not go off track`),
@@ -59,7 +59,7 @@ export default async (event: H3Event<EventHandlerRequest>) => {
   ]
 
   const stream = useOpenAI(event).beta.chat.completions.stream({
-    model: 'gpt-4-1106-preview', // 'gpt-3.5-turbo-1106',
+    model: 'qwen-max', // 'gpt-3.5-turbo-1106',
     messages: context,
     tools: [
       {
@@ -83,6 +83,7 @@ export default async (event: H3Event<EventHandlerRequest>) => {
   await stream.done()
 
   try {
+    console.log(completion)
     const parsed = JSON.parse(completion) as z.infer<typeof functionSchema>
 
     if (parsed) {
@@ -96,6 +97,7 @@ export default async (event: H3Event<EventHandlerRequest>) => {
     }
   }
   catch (err) {
+    console.log(err)
     throw createError({
       statusCode: 400,
       statusMessage: 'OpenAI doesnt return expected data',
