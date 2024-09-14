@@ -1,28 +1,25 @@
 version: "3"
 services:
-  nuxt:
+  vue0app:
+    mem_limit: 4g
+    container_name: vue0app
+    image: vue0app
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    environment:
+      - NODE_ENV=production
+      - BROWSERLESS=ws://localhost:3001
+      - NUXT_OPENAI_API_BASEURL=https://dashscope.aliyuncs.com/compatible-mode/v1
+      - NUXT_PUBLIC_DISABLE_LOGIN=true
     volumes:
-      - .:/app
+      - ./sqlite:/app/sqlite
+    command: ["node", "/app/.output/server/index.mjs"]
   browserless:
     container_name: browserless
     image: ghcr.io/browserless/chrome
     restart: always
     ports:
       - 3001:3000
-  turso:
-    container_name: turso
-    image: ghcr.io/tursodatabase/libsql-server:latest
-    platform: linux/amd64
-    # For some reason, the default db user
-    # in the container doesn't have write permissions
-    #user: root
-    ports:
-      - "8080:8080"
-      - "5001:5001"
-    volumes:
-      - ./libsql:/var/lib/sqld

@@ -29,7 +29,7 @@ async function handleSubmit() {
 
   loading.value = true
   isNewPrompt.value = true
-  umTrackEvent('create-generation')
+  // umTrackEvent('create-generation')
   try {
     const result = await handleInit(prompt.value)
     await navigateTo(`/t/${result.slug}`)
@@ -93,7 +93,7 @@ useSeoMeta({
       description="A GitHub account is required to use vue0."
     >
       <template #footer>
-        <a href="/api/auth/github" class="ml-auto" @click="umTrackEvent('login')">
+        <a href="/api/auth/github" class="ml-auto">
           <UiButton>
             <Github class="mr-2 h-4 w-4" />
             <span>Login with GitHub</span>

@@ -10,11 +10,10 @@ export async function screenshot(id: string) {
   const IS_PRODUCTION = process.env.NODE_ENV === 'production'
 
   const url = IS_PRODUCTION ? `${useRuntimeConfig().public.siteUrl}/s/${id}` : `http://localhost:3000/s/${id}`
-  const browserlessApiKey = useRuntimeConfig().browserlessApiKey
 
   const getBrowser = () =>
     IS_PRODUCTION
-      ? connect({ browserWSEndpoint: `wss://chrome.browserless.io?token=${browserlessApiKey}&--window-size=1280,720` })
+      ? connect({ browserWSEndpoint: `${process.env.BROWSERLESS}?--window-size=1280,720` })
       : launch({
         executablePath: chromeExecutables[process.platform as keyof typeof chromeExecutables],
         headless: true,

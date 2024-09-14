@@ -27,3 +27,5 @@ logs
 
 # ignore downloaded repo
 .repo
+
+sqlite

@@ -2,12 +2,14 @@
 export default defineNuxtConfig({
   // devtools totally broken, not sure why
   devtools: { enabled: false },
+
   app: {
     head: {
       link: [{ rel: 'icon', type: 'image/svg', href: '/logo.svg' }],
 
     },
   },
+
   runtimeConfig: {
     public: {
       siteUrl: '',
@@ -15,38 +17,41 @@ export default defineNuxtConfig({
       umamiId: '',
       disableLogin: true,
     },
-    browserlessApiKey: '',
     github: {
       clientId: '',
       clientSecret: '',
     },
     session: {
       name: 'nuxt-session',
-      password: 'test-vue0',
+      password: 'nuxt-session-nuxt-session-123456',
     },
   },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     'shadcn-nuxt',
     '@nuxtjs/google-fonts',
     'nuxt-auth-utils',
-    '@nuxtseo/module',
+    '@nuxtjs/seo',
     '@nuxt/content',
   ],
-  extends: ['nuxt-umami'],
-  appConfig: {
-    umami: {
-      version: 2,
-      ignoreLocalhost: true,
-    },
-  },
+
+  //   extends: ['nuxt-umami'],
+  //   appConfig: {
+  //     umami: {
+  //       version: 2,
+  //       ignoreLocalhost: true,
+  //     },
+  //   },
   shadcn: {
     prefix: 'Ui',
   },
+
   tailwindcss: {
     viewer: false,
   },
+
   ogImage: {
     debug: true,
     compatibility: {
@@ -55,6 +60,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   hooks: {
     'vite:extendConfig': (config, { isClient }) => {
       if (isClient)
@@ -62,6 +68,7 @@ export default defineNuxtConfig({
         config.resolve.alias.vue = 'vue/dist/vue.esm-bundler.js'
     },
   },
+
   nitro: {
     vercel: {
       functions: {
@@ -69,14 +76,18 @@ export default defineNuxtConfig({
       },
     },
   },
+
   googleFonts: {
     families: {
       Inter: '400..800',
     },
   },
+
   site: {
     name: 'vue0',
     description: 'Generate Component with simple text prompts.',
     defaultLocale: 'en',
   },
+
+  compatibilityDate: '2024-09-14',
 })

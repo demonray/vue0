@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { getHighlighter } from 'shikiji'
+import { getHighlighter } from 'shiki'
 
 const props = defineProps<{
   sfcString: string
