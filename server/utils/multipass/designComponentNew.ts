@@ -43,12 +43,12 @@ export default async (event: H3Event<EventHandlerRequest>) => {
       role: `user`,
       content:
         `Multiple library components can be used while creating a new component in order to help you do a better design job, faster.\n\nAVAILABLE LIBRARY COMPONENTS:\n\`\`\`\n${
-        components
-          .map((e) => {
-            return `${e.name} : ${e.description};`
-          })
-          .join('\n')
-         }\n\`\`\``,
+          components
+            .map((e) => {
+              return `${e.name} : ${e.description};`
+            })
+            .join('\n')
+        }\n\`\`\``,
     },
     {
       role: `user`,
@@ -59,7 +59,7 @@ export default async (event: H3Event<EventHandlerRequest>) => {
   ]
 
   const stream = useOpenAI(event).beta.chat.completions.stream({
-    model: 'qwen-max', // 'gpt-3.5-turbo-1106',
+    model: 'qwen2-72b-instruct', // 'gpt-3.5-turbo-1106',
     messages: context,
     tools: [
       {

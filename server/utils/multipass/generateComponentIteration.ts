@@ -58,7 +58,7 @@ export default async (event: H3Event<EventHandlerRequest>, component: DBComponen
   console.log(`> total context prompt tokens (estimate) : ${contextPromptToken}`)
 
   const stream = useOpenAI(event).beta.chat.completions.stream({
-    model: 'qwen-max',
+    model: 'qwen2-72b-instruct',
     messages: context,
     stream: true,
   })
