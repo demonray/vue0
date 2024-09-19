@@ -2,17 +2,17 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-ENV NODE_OPTIONS="--max-old-space-size=4096"
+# ENV NODE_OPTIONS="--max-old-space-size=4096"
 
-RUN npm install -g pnpm
+# RUN npm install -g pnpm
 
-COPY package.json ./
+# COPY package.json ./
 
-RUN pnpm install
+# RUN pnpm install
 
 COPY . .
 
-RUN pnpm run build
+# RUN pnpm run build
 
 EXPOSE 3000
 

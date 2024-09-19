@@ -8,14 +8,14 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 3000:3000
+      - 3002:3000
     environment:
       - NODE_ENV=production
       - BROWSERLESS=ws://localhost:3001
-      - NUXT_OPENAI_API_BASEURL=https://dashscope.aliyuncs.com/compatible-mode/v1
+      - NUXT_OPENAI_API_BASEURL=https://172.22.16.5:5002/v1
       - NUXT_PUBLIC_DISABLE_LOGIN=true
     volumes:
-      - ./sqlite:/app/sqlite
+      - .:/app
     command: ["node", "/app/.output/server/index.mjs"]
   browserless:
     container_name: browserless
